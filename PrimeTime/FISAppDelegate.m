@@ -18,8 +18,8 @@
     //self.window.backgroundColor = [UIColor whiteColor];
     //[self.window makeKeyAndVisible];
     
-    FISPrimeTimeTableViewController *ptVC = [[FISPrimeTimeTableViewController alloc] init];
-    NSLog(@"the answer is: %@", [NSString stringWithFormat:@"%li", [ptVC primeNumber:386]]);
+    //FISPrimeTimeTableViewController *ptVC = [[FISPrimeTimeTableViewController alloc] init];
+    //NSLog(@"the answer is: %@", [NSString stringWithFormat:@"%li", [ptVC primeNumber:5000]]);
     
     return YES;
 }

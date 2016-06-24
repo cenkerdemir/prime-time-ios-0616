@@ -20,12 +20,18 @@
     [super viewDidLoad];
     self.tableView.accessibilityIdentifier = @"table";
     NSMutableArray *mutablePrimes = [[NSMutableArray alloc] init];
+    NSLog(@"started...");
+    NSInteger firstPrime = [self primeNumber:(1+5000)];
     
     for (NSUInteger i=0; i < 100; i++) {
-        [mutablePrimes addObject:[NSString stringWithFormat:@"%li",[self primeNumber:(i + 1 + 5000)]]];
-        NSLog(@"%@", mutablePrimes[i]);
+        if (i==0) {
+            [mutablePrimes addObject:[NSString stringWithFormat:@"%li",firstPrime]];
+        } else {
+            [mutablePrimes addObject:[NSString stringWithFormat:@"%li",[self nextPrime:[[mutablePrimes objectAtIndex:i-1] integerValue]+1]]];
+        }
     }
     self.primeArray = mutablePrimes;
+    NSLog(@"%@", self.primeArray);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -54,27 +60,40 @@
     if(prime <= 0) {
         return 0;
     }
-    
     NSInteger primeCounter = 2;
-    NSInteger numberToLook = 2;
+    NSInteger numberToLook = 1;
     NSInteger numberToDivide = 2;
-    NSInteger numberToSend = numberToLook;
     
-    while (primeCounter <= prime) {
+    while (primeCounter < prime) {
+        numberToLook+=2;
         for (numberToDivide = 2; numberToDivide < numberToLook/2; numberToDivide++) {
             if (numberToLook%numberToDivide == 0) {
                 break;
             }
         }
-        if(numberToDivide == numberToLook/2) {
+        if(numberToDivide == (numberToLook-1)/2) {
             primeCounter++;
-            numberToSend = numberToLook;
         }
-        numberToLook++;
     }
-    return numberToSend;
+    return numberToLook;
 }
 
+- (NSInteger)nextPrime:(NSInteger)prime {
+    
+    NSInteger numberToDivide = 2;
+    while (YES) {
+        for (numberToDivide = 2; numberToDivide < prime; numberToDivide++) {
+            if (prime%numberToDivide == 0) {
+                break;
+            }
+        }
+        if (numberToDivide == prime) {
+            break;
+        }
+        prime++;
+    }
+    return prime;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
