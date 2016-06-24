@@ -7,15 +7,20 @@
 //
 
 #import "FISAppDelegate.h"
+#import "FISPrimeTimeTableViewController.h"
 
 @implementation FISAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    //self.window.backgroundColor = [UIColor whiteColor];
+    //[self.window makeKeyAndVisible];
+    
+    FISPrimeTimeTableViewController *ptVC = [[FISPrimeTimeTableViewController alloc] init];
+    NSLog(@"the answer is: %@", [NSString stringWithFormat:@"%li", [ptVC primeNumber:386]]);
+    
     return YES;
 }
 
